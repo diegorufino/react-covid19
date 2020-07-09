@@ -31,7 +31,7 @@ class App extends Component {
       totalRecovered: '-',
       totalDeaths: '-',
       casesDate: '',
-      listCountry: dataCountriesCasesJson.result,
+      listCountry: dataCountriesCasesJson,
       countryDate: '',
       dateFrom: '',
       dateTo: ''
@@ -233,7 +233,7 @@ class App extends Component {
                 <label className="countryDate">País {this.state.countryDate}</label>
                 <select className="form-control" name="countryDate" onChange={this.paisData} id="countryDate">
                   <option value="">Selecione</option>
-                  {listCountry && listCountry.map((c, i) =>
+                  {listCountry.result && listCountry.result.map((c, i) =>
                     <option key={i} value={c.Slug}>{c.Country}</option>)}
                 </select>
               </div>
