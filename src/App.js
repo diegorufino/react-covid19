@@ -22,11 +22,6 @@ class App extends Component {
     const response = await fetch('https://api.covid19api.com/summary');
     const dataCasesJson = await response.json();
 
-    const responseCountries = await fetch('https://api.covid19api.com/countries');
-    const dataCountriesCasesJson = await responseCountries.json();
-
-    console.log(dataCountriesCasesJson);
-
     this.setState({
       cases: dataCasesJson,
       country: '',
@@ -34,7 +29,7 @@ class App extends Component {
       totalRecovered: '-',
       totalDeaths: '-',
       casesDate: '',
-      listCountry: dataCountriesCasesJson,
+      listCountry: list,
       countryDate: '',
       dateFrom: '',
       dateTo: ''
@@ -236,7 +231,7 @@ class App extends Component {
                 <label className="countryDate">País {this.state.countryDate}</label>
                 <select className="form-control" name="countryDate" onChange={this.paisData} id="countryDate">
                   <option value="">Selecione</option>
-                  {list && list.map((c) =>
+                  {listCountry && listCountry.map((c) =>
                     <option key={c.Slug} value={c.Slug}>{c.Country}</option>)}
                 </select>
               </div>
