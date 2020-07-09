@@ -31,7 +31,7 @@ class App extends Component {
       totalRecovered: '-',
       totalDeaths: '-',
       casesDate: '',
-      listCountry: dataCountriesCasesJson,
+      listCountry: dataCountriesCasesJson.result,
       countryDate: '',
       dateFrom: '',
       dateTo: ''
