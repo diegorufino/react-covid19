@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { formatDate } from './Util';
+import { list } from './listContries'
 
 class App extends Component {
 
@@ -16,13 +17,15 @@ class App extends Component {
     dateTo: ''
   }
 
-  async componentDidMount() {    
+  async componentDidMount() {
 
     const response = await fetch('https://api.covid19api.com/summary');
     const dataCasesJson = await response.json();
 
     const responseCountries = await fetch('https://api.covid19api.com/countries');
     const dataCountriesCasesJson = await responseCountries.json();
+
+    console.log(dataCountriesCasesJson);
 
     this.setState({
       cases: dataCasesJson,
@@ -54,7 +57,7 @@ class App extends Component {
       totalRecovered = cases.Countries[i].TotalRecovered;
       totalDeaths = cases.Countries[i].TotalDeaths;
     }
-    
+
     this.setState({
       cases: cases,
       country: country,
@@ -98,8 +101,8 @@ class App extends Component {
     let country = this.state.countryDate;
     let dateFrom = this.state.dateFrom;
     let dateTo = this.state.dateTo;
-    
-    const responseDate = await fetch('https://api.covid19api.com/country/'+country+'/status/confirmed/live?from='+dateFrom+'T00:00:01Z&to='+dateTo+'T23:59:59Z');
+
+    const responseDate = await fetch('https://api.covid19api.com/country/' + country + '/status/confirmed/live?from=' + dateFrom + 'T00:00:01Z&to=' + dateTo + 'T23:59:59Z');
     const dataCasesDateJson = await responseDate.json();
 
     this.setState({
@@ -120,10 +123,10 @@ class App extends Component {
     const { cases, totalConfirmed, totalRecovered, totalDeaths, casesDate, listCountry } = this.state;
 
     return (
-      <div className="form">
+      <div className="form" >
 
         {/* CASOS NO MUNDO */}
-        <div className="jumbotron">
+        < div className="jumbotron" >
           <h4 className="center">Covid 19 no mundo</h4>
 
           <div className="row">
@@ -162,10 +165,10 @@ class App extends Component {
             </div>
 
           </div>
-        </div>
+        </div >
 
         {/* CASOS POR PAIS */}
-        <div className="jumbotron">
+        < div className="jumbotron" >
 
           <h4 className="center">Casos por País</h4>
 
@@ -220,10 +223,10 @@ class App extends Component {
             </div>
 
           </div>
-        </div>
+        </div >
 
         {/* CASOS POR PERIODO */}
-        <div className="jumbotron">
+        < div className="jumbotron" >
           <h4 className="center">Casos confirmados por período</h4>
 
           <div className="row">
@@ -233,8 +236,8 @@ class App extends Component {
                 <label className="countryDate">País {this.state.countryDate}</label>
                 <select className="form-control" name="countryDate" onChange={this.paisData} id="countryDate">
                   <option value="">Selecione</option>
-                  {listCountry.result && listCountry.result.map((c, i) =>
-                    <option key={i} value={c.Slug}>{c.Country}</option>)}
+                  {list && list.map((c) =>
+                    <option key={c.Slug} value={c.Slug}>{c.Country}</option>)}
                 </select>
               </div>
             </div>
@@ -277,9 +280,9 @@ class App extends Component {
             )}
           </div>
 
-        </div>
+        </div >
 
-      </div>
+      </div >
     );
   }
 }
